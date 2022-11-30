@@ -1,6 +1,10 @@
 from red.neurona import *
 import matplotlib.pyplot as plt
 import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 
 
 class red_neuronal(Neurona):

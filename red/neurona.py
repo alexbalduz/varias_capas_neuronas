@@ -4,6 +4,9 @@ from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 import numpy as np
 import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 
 
@@ -77,8 +80,8 @@ import matplotlib.pyplot as plt
 
 class red_neuronal(Neurona):
     def __init__ (self, tasa_de_aprendizaje, epochs):
-        super().__init__(tasa_aprendizaje= tasa_de_aprendizaje)
-        super().__init__(epochs= epochs)
+        self.tasa_aprendizaje= tasa_de_aprendizaje
+        self.epochs= epochs
         self.Y = Neurona.preparacion_datos()
         self.train_x, self.test_x, self.train_y, self.test_y  = Neurona.aprendizaje()
         self.tf_neuronas_entradas_X, self.tf_valores_reales_Y, self.pesos, self.peso_sesgo = Neurona.parametrización()
@@ -209,19 +212,6 @@ class red_neuronal(Neurona):
 
 
         sesion.close()
-'''
-def main ():
-    red = red_neuronal()
-    red.red_neuronas_multicapa()
-    funcion_error, funcion_precision, optimizador = red.error_optimizacion()
-    grafica, sesion = red.aprendizaje(funcion_error, funcion_precision, optimizador)
-    red.plot(grafica)
-    clasificaciones, formula_precision = red.verf_aprendizaje(red, 1)
-    red.precision_pruebas(sesion, clasificaciones, formula_precision)
-    red.precision_aprendizaje(sesion, clasificaciones, formula_precision)
-    red.precision_datos(sesion, clasificaciones, formula_precision)
-
-'''
 
 
 

@@ -1,6 +1,4 @@
-import red.neurona as neurona
-import red.red_neuronal as red_neuronal
+import red.prueba1 as prueba1
 
-def main():
-    neurona.main()
-    red_neuronal.main()
+if __name__ == '__main__':
+    prueba1.main()

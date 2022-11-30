@@ -4,6 +4,9 @@ from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 import numpy as np
 import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 
 class Neurona():
