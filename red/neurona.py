@@ -3,12 +3,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 import numpy as np
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+import tensorflow as tf
+
+
 
 class Neurona():
     def __init__ (self):
-        self.observaciones = pd.read_csv("código cap11/datas/sonar.all-data.csv")
+        self.observaciones = pd.read_csv("datas/sonar.all-data.csv")
         self.epochs = 300
         self.cantidad_neuronas_entrada = 60
         self.cantidad_neuronas_salida = 2
@@ -194,8 +195,8 @@ class red_neuronal(Neurona):
         n_clasificaciones_correctas = 0
         for i in range(0,207):
 
-            prediccion_run = sesion.run(clasificaciones, feed_dict={self.tf_neuronas_entradas_X:X[i].reshape(1,60)})
-            accuracy_run = sesion.run(formula_precision, feed_dict={self.tf_neuronas_entradas_X:X[i].reshape(1,60), self.tf_valores_reales_Y:self.Y[i].reshape(1,2)})
+            prediccion_run = sesion.run(clasificaciones, feed_dict={self.tf_neuronas_entradas_X:self.X[i].reshape(1,60)})
+            accuracy_run = sesion.run(formula_precision, feed_dict={self.tf_neuronas_entradas_X:self.X[i].reshape(1,60), self.tf_valores_reales_Y:self.Y[i].reshape(1,2)})
 
             n_clasificaciones = n_clasificaciones + 1
             if (accuracy_run * 100 == 100):
@@ -240,6 +241,5 @@ def main ():
     red.precision_aprendizaje(sesion, clasificaciones, formula_precision)
     red.precision_datos(sesion, clasificaciones, formula_precision)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

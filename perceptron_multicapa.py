@@ -15,8 +15,8 @@
 #   Elegir la versión en la parte inferior derecha
 #   Haga clic en el botón install situado en la parte inferior izquierda
 #-----------------------------------------------------------------------------------------
+
 import tensorflow as tf
-tf.disable_v2_behavior()
 import numpy as np
 
 

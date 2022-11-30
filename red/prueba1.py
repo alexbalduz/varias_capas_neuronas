@@ -4,12 +4,15 @@ from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 import numpy as np
 import matplotlib.pyplot as plt
+import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
+
 class Neurona():
     def __init__ (self):
-        self.observaciones = pd.read_csv("código cap11/datas/sonar.all-data.csv")
+        self.observaciones = pd.read_csv("datas/sonar.all-data.csv")
         self.epochs = 600
         self.cantidad_neuronas_entrada = 60
         self.cantidad_neuronas_salida = 2
@@ -51,14 +54,14 @@ class Neurona():
         return train_x, test_x, train_y, test_y
 
     def parametrización(self, x):
-        tf_neuronas_entradas_X = tf.placeholder(tf.float32,[None, 60])
-        tf_valores_reales_Y = tf.placeholder(tf.float32,[None, 2])
+        tf_neuronas_entradas_X = tf.compat.v1.placeholder(tf.float32,[None, 60])
+        tf_valores_reales_Y = tf.compat.v1.placeholder(tf.float32,[None, 2])
         pesos = {
             #60 neuronas de las entradas hacia 24 Neuronas de la capa oculta
-            'capa_entrada_hacia_oculta': tf.Variable(tf.random_uniform([60, x], minval=-0.3, maxval=0.3), tf.float32),
+            'capa_entrada_hacia_oculta': tf.Variable(tf.compat.v1.random_uniform([60, x], minval=-0.3, maxval=0.3), tf.float32),
 
             # 12 neuronas de la capa oculta hacia 2 de la capa de salida
-            'capa_oculta_hacia_salida': tf.Variable(tf.random_uniform([x, 2], minval=-0.3, maxval=0.3), tf.float32),
+            'capa_oculta_hacia_salida': tf.Variable(tf.compat.v1.random_uniform([x, 2], minval=-0.3, maxval=0.3), tf.float32),
 
 
         }

@@ -1,5 +1,6 @@
-from neurona import *
+from red.neurona import *
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 
 class red_neuronal(Neurona):
@@ -12,7 +13,6 @@ class red_neuronal(Neurona):
         self.tf_neuronas_entradas_X, self.tf_valores_reales_Y, self.pesos, self.peso_sesgo = Neurona.parametrización()
 
     def red_neuronas_multicapa(self):
-
         #Cálculo de la activación de la primera capa
         primera_activacion = tf.sigmoid(tf.matmul(self.tf_neuronas_entradas_X, self.pesos['capa_entrada_hacia_oculta']) + self.peso_sesgo['peso_sesgo_capa_entrada_hacia_oculta'])
 
@@ -123,8 +123,8 @@ class red_neuronal(Neurona):
         n_clasificaciones_correctas = 0
         for i in range(0,207):
 
-            prediccion_run = sesion.run(clasificaciones, feed_dict={self.tf_neuronas_entradas_X:X[i].reshape(1,60)})
-            accuracy_run = sesion.run(formula_precision, feed_dict={self.tf_neuronas_entradas_X:X[i].reshape(1,60), self.tf_valores_reales_Y:self.Y[i].reshape(1,2)})
+            prediccion_run = sesion.run(clasificaciones, feed_dict={self.tf_neuronas_entradas_X:self.X[i].reshape(1,60)})
+            accuracy_run = sesion.run(formula_precision, feed_dict={self.tf_neuronas_entradas_X:self.X[i].reshape(1,60), self.tf_valores_reales_Y:self.Y[i].reshape(1,2)})
 
             n_clasificaciones = n_clasificaciones + 1
             if (accuracy_run * 100 == 100):
@@ -148,4 +148,8 @@ def main ():
     red.precision_pruebas(sesion, clasificaciones, formula_precision)
     red.precision_aprendizaje(sesion, clasificaciones, formula_precision)
     red.precision_datos(sesion, clasificaciones, formula_precision)
+
+
+if __name__ == '__main__':
+    main()
 
